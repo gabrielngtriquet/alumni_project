@@ -1,0 +1,60 @@
+<div>
+  <div>
+    <h1>
+      Post #<%= @the_post.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/posts">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_post/<%= @the_post.id %>">
+          Delete post
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Body
+      </dt>
+      <dd>
+        <%= @the_post.content %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_post.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_post.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Edit post
+    </h2>
+
+<%= form_with model: @the_post, url: "/modify_post/#{@the_post.id}", scope: nil, method: "post" do |form| %>
+  <%= form.label :content, for: "query_content" %>
+  <%= form.rich_text_area :content, id: "query_content", name: "query_content" %>
+  <button>Update post</button>
+<% end %>
+  </div>
+</div>
