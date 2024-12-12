@@ -1,0 +1,97 @@
+<div>
+  <% if @the_post.present? %>
+    <h1>Post Details</h1>
+    <p><%= @the_post.content %></p>
+
+    <%= render "comments/index", list_of_comments: @list_of_comments %>
+
+    <div>
+      <a href="/posts">
+        Go back
+      </a>
+    </div>
+
+    <div>
+      <a href="/delete_post/<%= @the_post.id %>">
+        Delete post
+      </a>
+    </div>
+  <% else %>
+    <p>Post not found.</p>
+  <% end %>
+</div>
+
+
+<div>
+  <div>
+    <h2>
+      Edit post
+    </h2>
+
+    <form action="/modify_post/<%= @the_post.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_post.user_id %>">
+      </div>
+
+      <div>
+        <label for="content_box">
+          Content
+        </label>
+
+        <textarea id="content_box" name="query_content"><%= @the_post.content %></textarea>
+      </div>
+
+      <div>
+        <label for="comments_count_box">
+          Comments count
+        </label>
+
+        <input type="text" id="comments_count_box" name="query_comments_count" value="<%= @the_post.comments_count %>">
+      </div>
+
+      <button>
+        Update post
+      </button>
+    </form>
+  </div>
+</div>
+
+  <div>
+    <!-- Add Comment Form -->
+    <h3>Add a Comment</h3>
+    <%= form_with(url: "/insert_comment", method: :post, local: true) do |f| %>
+      <%= hidden_field_tag :query_post_id, @the_post.id %>
+      <%= hidden_field_tag :query_user_id, current_user.id %> <!-- Assuming Devise for authentication -->
+      <div>
+        <label for="comment_body">Comment:</label>
+        <%= text_area_tag :query_body, nil, rows: 3 %>
+      </div>
+      <button type="submit">Add Comment</button>
+    <% end %>
+  </div>
+
+  <div>
+    <!-- Like Button -->
+    <h3>Like This Post</h3>
+    <%= button_to "Like", "/insert_like", method: :post, params: { query_post_id: @the_post.id, query_user_id: current_user.id }, class: "btn btn-primary" %>
+    <p>Likes: <%= @the_post.likes.count %></p>
+  </div>
+
+  <div>
+    <a href="/posts">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_post/<%= @the_post.id %>">
+      Delete post
+    </a>
+  </div>
+</div>
+
+<hr>

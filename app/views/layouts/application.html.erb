@@ -10,7 +10,24 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+ <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <ul style="list-style-type: none; padding: 0; display: flex; gap: 15px;">
+        <li><%= link_to "Home", root_path, class: "btn btn-primary" %></li>
+        <li><%= link_to "Alumni Directory", alumni_directory_path, class: "btn btn-secondary" %></li>
+        <li><%= link_to "Job Postings", job_postings_path, class: "btn btn-info" %></li>
+        <li><%= link_to "Posts", posts_path, class: "btn btn-success" %></li>
+        <li><%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-warning" %></li>
+        <li><%= link_to "Follow requests", follow_requests_path, class: "btn btn-warning" %></li>
+      </ul>
+    </nav>
+
+    <hr>
+
+    <!-- Main Content -->
+    <div>
+      <%= yield %>
+    </div>
   </body>
 </html>

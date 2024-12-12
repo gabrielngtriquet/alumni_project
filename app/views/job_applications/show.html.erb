@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      Job application #<%= @the_job_application.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/job_applications">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_job_application/<%= @the_job_application.id %>">
+          Delete job application
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Personal statement
+      </dt>
+      <dd>
+        <%= @the_job_application.personal_statement %>
+      </dd>
+
+      <dt>
+        Resume
+      </dt>
+      <dd>
+        <%= @the_job_application.resume %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_job_application.user_id %>
+      </dd>
+
+      <dt>
+        Job posting
+      </dt>
+      <dd>
+        <%= @the_job_application.job_posting_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_job_application.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_job_application.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit job application
+    </h2>
+
+    <form action="/modify_job_application/<%= @the_job_application.id %>"  method="post" >
+      <div>
+        <label for="personal_statement_box">
+          Personal statement
+        </label>
+
+        <textarea id="personal_statement_box" name="query_personal_statement"><%= @the_job_application.personal_statement %></textarea>
+      </div>
+
+      <div>
+        <label for="resume_box">
+          Resume
+        </label>
+
+        <input type="text" id="resume_box" name="query_resume" value="<%= @the_job_application.resume %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_job_application.user_id %>">
+      </div>
+
+      <div>
+        <label for="job_posting_id_box">
+          Job posting
+        </label>
+
+        <input type="text" id="job_posting_id_box" name="query_job_posting_id" value="<%= @the_job_application.job_posting_id %>">
+      </div>
+
+      <button>
+        Update job application
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

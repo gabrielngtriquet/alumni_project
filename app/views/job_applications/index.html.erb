@@ -1,0 +1,134 @@
+<div>
+  <div>
+    <h1>
+      List of all job applications
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new job application
+    </h2>
+
+    <form action="/insert_job_application" method="post">
+      <div>
+        <label for="personal_statement_box">
+          Personal statement
+        </label>
+
+        <textarea id="personal_statement_box" name="query_personal_statement" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="resume_box">
+          Resume
+        </label>
+
+        <input type="text" id="resume_box" name="query_resume">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="job_posting_id_box">
+          Job posting
+        </label>
+
+        <input type="text" id="job_posting_id_box" name="query_job_posting_id">
+      </div>
+
+      <button>
+        Create job application
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Personal statement
+        </th>
+
+        <th>
+          Resume
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Job posting
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_job_applications.each do |a_job_application| %>
+      <tr>
+        <td>
+          <%= a_job_application.id %>
+        </td>
+
+        <td>
+          <%= a_job_application.personal_statement %>
+        </td>
+
+        <td>
+          <%= a_job_application.resume %>
+        </td>
+
+        <td>
+          <%= a_job_application.user_id %>
+        </td>
+
+        <td>
+          <%= a_job_application.job_posting_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_job_application.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_job_application.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/job_applications/<%= a_job_application.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,120 @@
+<div>
+  <h1>Alumni Directory</h1>
+
+  <!-- Filter Form -->
+  <%= form_with(url: alumni_directory_path, method: :get, local: true) do %>
+    <fieldset>
+      <legend>Filter Users</legend>
+      
+      <div>
+        <label for="admin">Admin:</label>
+        <input type="checkbox" name="admin" id="admin" value="1" <%= "checked" if params[:admin] == "1" %>>
+      </div>
+
+      <div>
+        <label for="alumn">Alumn:</label>
+        <input type="checkbox" name="alumn" id="alumn" value="1" <%= "checked" if params[:alumn] == "1" %>>
+      </div>
+
+      <div>
+        <label for="student">Student:</label>
+        <input type="checkbox" name="student" id="student" value="1" <%= "checked" if params[:student] == "1" %>>
+      </div>
+
+      <div>
+        <label for="professor">Professor:</label>
+        <input type="checkbox" name="professor" id="professor" value="1" <%= "checked" if params[:professor] == "1" %>>
+      </div>
+
+      <div>
+        <label for="country_of_residence">Country of Residence:</label>
+        <select name="country_of_residence" id="country_of_residence">
+          <option value="">All Countries</option>
+          <% User.distinct.pluck(:country_of_residence).compact.each do |country| %>
+            <option value="<%= country %>" <%= "selected" if params[:country_of_residence] == country %>>
+              <%= country %>
+            </option>
+          <% end %>
+        </select>
+      </div>
+
+      <div>
+        <label for="company">Company:</label>
+        <input type="text" name="company" id="company" value="<%= params[:company] %>">
+      </div>
+
+      <div>
+        <label for="industry_of_occupation">Industry of Occupation:</label>
+        <select name="industry_of_occupation" id="industry_of_occupation">
+          <option value="">All Industries</option>
+          <% User.distinct.pluck(:industry_of_occupation).compact.each do |industry| %>
+            <option value="<%= industry %>" <%= "selected" if params[:industry_of_occupation] == industry %>>
+              <%= industry %>
+            </option>
+          <% end %>
+        </select>
+      </div>
+
+      <div>
+        <label for="dob">Date of Birth:</label>
+        <input type="date" name="dob" id="dob" value="<%= params[:dob] %>">
+      </div>
+
+      <div>
+        <button type="submit">Search</button>
+      </div>
+    </fieldset>
+  <% end %>
+
+  <hr>
+
+  <!-- Results Table -->
+  <div>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Country</th>
+          <th>City</th>
+          <th>Company</th>
+          <th>Industry</th>
+          <th>Date of Birth</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      <%= debug @users %>
+        <% if @users.present? %>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.name || "N/A" %></td>
+              <td>
+                <% if user.admin %>
+                  Admin
+                <% elsif user.alumn %>
+                  Alumn
+                <% elsif user.student %>
+                  Student
+                <% elsif user.professor %>
+                  Professor
+                <% else %>
+                  N/A
+                <% end %>
+              </td>
+              <td><%= user.country_of_residence || "N/A" %></td>
+              <td><%= user.city_of_residence || "N/A" %></td>
+              <td><%= user.company || "N/A" %></td>
+              <td><%= user.industry_of_occupation || "N/A" %></td>
+              <td><%= user.dob || "N/A" %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="7">No users found.</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

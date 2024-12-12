@@ -1,0 +1,77 @@
+<h1>Edit Your Profile</h1>
+
+<%= form_with model: @user, url: update_profile_path, method: :patch, local: true do |f| %>
+
+      <!-- Display user_id as plain text -->
+      <label for="user_id">User ID:</label>
+      <span id="user_id"><%= @user.id %></span>
+    </div>
+
+    
+  <div>
+    <%= f.label :email, "Email (cannot be changed)" %><br />
+    <%= f.text_field :email, disabled: true %>
+  </div>
+
+  <div>
+    <%= f.label :admin %><br />
+    <%= f.check_box :admin %>
+  </div>
+
+  <div>
+    <%= f.label :alumn %><br />
+    <%= f.check_box :alumn %>
+  </div>
+
+  <div>
+    <%= f.label :dob, "Date of Birth" %><br />
+    <%= f.date_field :dob %>
+  </div>
+
+  <div>
+    <%= f.label :profile_picture, "Profile Picture (URL)" %><br />
+    <%= f.text_field :profile_picture %>
+  </div>
+
+  <div>
+    <%= f.label :country_of_residence %><br />
+    <%= f.text_field :country_of_residence %>
+  </div>
+
+  <div>
+    <%= f.label :city_of_residence %><br />
+    <%= f.text_field :city_of_residence %>
+  </div>
+
+  <div>
+    <%= f.label :industry_of_occupation, "Industry of Occupation" %><br />
+    <%= f.text_field :industry_of_occupation %>
+  </div>
+
+  <div>
+    <%= f.label :company %><br />
+    <%= f.text_field :company %>
+  </div>
+
+  <div>
+    <%= f.label :student %><br />
+    <%= f.check_box :student %>
+  </div>
+
+  <div>
+    <%= f.label :professor %><br />
+    <%= f.check_box :professor %>
+  </div>
+
+  <div>
+    <%= f.submit "Update Profile" %>
+  </div>
+
+  <div>
+  <h1>Details for <%= @user.email %></h1>
+  <!-- Other user details here -->
+
+  <%= link_to "Back to Home", root_path, class: "btn btn-primary" %>
+</div>
+
+<% end %>

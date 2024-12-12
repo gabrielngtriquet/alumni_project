@@ -1,0 +1,138 @@
+<div>
+  <div>
+    <h1>
+      Job posting #<%= @the_job_posting.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/job_postings">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_job_posting/<%= @the_job_posting.id %>">
+          Delete job posting
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Company
+      </dt>
+      <dd>
+        <%= @the_job_posting.company %>
+      </dd>
+
+      <dt>
+        Sector of occupation
+      </dt>
+      <dd>
+        <%= @the_job_posting.sector_of_occupation %>
+      </dd>
+
+      <dt>
+        Compensation
+      </dt>
+      <dd>
+        <%= @the_job_posting.compensation %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_job_posting.user_id %>
+      </dd>
+
+      <dt>
+        Job applications count
+      </dt>
+      <dd>
+        <%= @the_job_posting.job_applications_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_job_posting.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_job_posting.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit job posting
+    </h2>
+
+    <form action="/modify_job_posting/<%= @the_job_posting.id %>"  method="post" >
+      <div>
+        <label for="company_box">
+          Company
+        </label>
+
+        <input type="text" id="company_box" name="query_company" value="<%= @the_job_posting.company %>">
+      </div>
+
+      <div>
+        <label for="sector_of_occupation_box">
+          Sector of occupation
+        </label>
+
+        <input type="text" id="sector_of_occupation_box" name="query_sector_of_occupation" value="<%= @the_job_posting.sector_of_occupation %>">
+      </div>
+
+      <div>
+        <label for="compensation_box">
+          Compensation
+        </label>
+
+        <input type="text" id="compensation_box" name="query_compensation" value="<%= @the_job_posting.compensation %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_job_posting.user_id %>">
+      </div>
+
+      <div>
+        <label for="job_applications_count_box">
+          Job applications count
+        </label>
+
+        <input type="text" id="job_applications_count_box" name="query_job_applications_count" value="<%= @the_job_posting.job_applications_count %>">
+      </div>
+
+      <button>
+        Update job posting
+      </button>
+    </form>
+  </div>
+</div>
+
+<h2>Applications</h2>
+<% if @job_posting.present? %>
+  <%= link_to "Apply for this job", new_job_posting_job_application_path(@job_posting), class: "btn btn-primary" %>
+<% else %>
+  <p>Job posting not found.</p>
+<% end %>
+
+<hr>

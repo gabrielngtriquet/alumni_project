@@ -1,0 +1,32 @@
+<div>
+  <h3>Comments</h3>
+
+  <% if list_of_comments.present? %>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Post</th>
+          <th>User</th>
+          <th>Body</th>
+          <th>Created at</th>
+          <th>Updated at</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% list_of_comments.each do |comment| %>
+          <tr>
+            <td><%= comment.id %></td>
+            <td><%= comment.post_id %></td>
+            <td><%= comment.user_id %></td>
+            <td><%= comment.body %></td>
+            <td><%= time_ago_in_words(comment.created_at) %> ago</td>
+            <td><%= time_ago_in_words(comment.updated_at) %> ago</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No comments yet. Be the first to comment!</p>
+  <% end %>
+</div>
