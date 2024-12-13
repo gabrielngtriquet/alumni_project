@@ -1,8 +1,12 @@
 class JobApplicationsController < ApplicationController
   def index
-    @job_applications = @job_posting.job_applications
-
+    if current_user
+      @job_applications = current_user.job_applications
+    else
+      redirect_to login_path, alert: "You must be logged in to view job applications."
+    end
   end
+  
 
   def show
     the_id = params.fetch("path_id")
@@ -18,15 +22,16 @@ class JobApplicationsController < ApplicationController
     the_job_application = JobApplication.new
     the_job_application.personal_statement = params.fetch("query_personal_statement")
     the_job_application.resume = params.fetch("query_resume")
-    the_job_application.user_id = params.fetch("query_user_id")
+    the_job_application.user_id = current_user.id  # Use current_user.id here
     the_job_application.job_posting_id = params.fetch("query_job_posting_id")
-
-    if @job_application.save
-      redirect_to job_posting_path(@job_posting), notice: "Application submitted successfully."
+  
+    if the_job_application.save
+      redirect_to job_posting_path(the_job_application.job_posting_id), notice: "Application submitted successfully."
     else
       render :new, alert: "Failed to submit application."
     end
   end
+  
 
   def update
     the_id = params.fetch("path_id")
@@ -63,5 +68,4 @@ end
 
 def job_application_params
   params.require(:job_application).permit(:cover_letter, :status)
-end
 end

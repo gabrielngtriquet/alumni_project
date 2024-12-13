@@ -11,7 +11,7 @@
 #  dob                       :date
 #  email                     :string           default(""), not null
 #  encrypted_password        :string           default(""), not null
-#  industry_of_occupation    :string
+#  indsutry_of_occupation    :string
 #  name                      :string
 #  professor                 :boolean
 #  profile_picture           :string

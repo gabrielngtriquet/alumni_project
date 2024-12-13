@@ -92,6 +92,7 @@ post "/insert_like", { controller: "likes", action: "create" }
   # Routes for the Job application resource:
 
   # CREATE
+
   post("/insert_job_application", { :controller => "job_applications", :action => "create" })
           
   # READ
@@ -111,6 +112,7 @@ post "/insert_like", { controller: "likes", action: "create" }
   # Routes for the Job posting resource:
 
   # CREATE
+
   post("/insert_job_posting", { :controller => "job_postings", :action => "create" })
           
   # READ

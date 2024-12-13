@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+ .uchicago-logo {
+  max-width: 10%; /* Ensure it scales to fit within its container */
+  height: auto;    /* Maintain aspect ratio */
+  display: block;  /* Ensures it behaves like a block element */
+  margin: 0 auto;  /* Centers the image horizontally */
+}

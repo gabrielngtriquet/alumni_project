@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+<header>
+      <%= image_tag "https://chen.uchicago.edu/files/2019/07/UChicago-logo-1024x1024.jpg", alt: "University of Chicago", class: "uchicago-logo" %>
+    </header>
+
+
   <head>
     <title>Rails Template</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -17,9 +22,11 @@
         <li><%= link_to "Home", root_path, class: "btn btn-primary" %></li>
         <li><%= link_to "Alumni Directory", alumni_directory_path, class: "btn btn-secondary" %></li>
         <li><%= link_to "Job Postings", job_postings_path, class: "btn btn-info" %></li>
+        <li><%= link_to "Job applications", job_applications_path, class: "btn btn-tough" %></li>
         <li><%= link_to "Posts", posts_path, class: "btn btn-success" %></li>
         <li><%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-warning" %></li>
         <li><%= link_to "Follow requests", follow_requests_path, class: "btn btn-warning" %></li>
+
       </ul>
     </nav>
 

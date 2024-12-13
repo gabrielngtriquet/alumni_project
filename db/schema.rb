@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_12_080206) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_12_064452) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_12_080206) do
     t.date "dob"
     t.string "profile_picture"
     t.string "country_of_residence"
-    t.string "industry_of_occupation"
+    t.string "indsutry_of_occupation"
     t.string "company"
     t.string "city_of_residence"
     t.boolean "student"

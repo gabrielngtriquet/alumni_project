@@ -8,14 +8,10 @@ class JobPostingsController < ApplicationController
   end
 
   def show
-    @the_job_posting = JobPosting.find(params[:id]) # Ensure the record exists and the ID is passed
-  rescue ActiveRecord::RecordNotFound
-    redirect_to job_postings_path, alert: "Job posting not found."
+    @the_job_posting = JobPosting.find(params[:id])
   end
-end
 
-  def create
-
+def create
     the_job_posting = JobPosting.new
     the_job_posting.company = params.fetch("query_company")
     the_job_posting.sector_of_occupation = params.fetch("query_sector_of_occupation")
@@ -25,11 +21,12 @@ end
 
     if the_job_posting.valid?
       the_job_posting.save
-      redirect_to("/job_postings", { :notice => "Job posting created successfully." })
+      redirect_to("/job_postings", { notice: "Job posting created successfully." })
     else
-      redirect_to("/job_postings", { :alert => the_job_posting.errors.full_messages.to_sentence })
+      redirect_to("/job_postings", { alert: the_job_posting.errors.full_messages.to_sentence })
     end
   end
+
 
   def update
     the_id = params.fetch("path_id")
@@ -57,3 +54,4 @@ end
 
     redirect_to("/job_postings", { :notice => "Job posting deleted successfully."} )
   end
+end
