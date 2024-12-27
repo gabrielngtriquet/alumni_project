@@ -1,40 +1,101 @@
-<!DOCTYPE html>
-<html>
-<header>
-      <%= image_tag "https://chen.uchicago.edu/files/2019/07/UChicago-logo-1024x1024.jpg", alt: "University of Chicago", class: "uchicago-logo" %>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UChicago Alumni Platform</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+    .uchicago-logo {
+      max-width: 150px;
+      margin: 20px auto;
+      display: block;
+    }
+    .navbar {
+      background-color: #800000;
+      padding: 10px 20px;
+    }
+    .navbar a {
+      color: white !important;
+      text-decoration: none;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+    .btn {
+      color: white;
+      border: none;
+    }
+    .btn-primary {
+      background-color: #800000;
+    }
+    .btn-secondary {
+      background-color: #b3b3b3;
+    }
+    .btn-info {
+      background-color: #0056b3;
+    }
+    .btn-success {
+      background-color: #198754;
+    }
+    .btn-warning {
+      background-color: #ffc107;
+    }
+    .btn-tough {
+      background-color: #6c757d;
+    }
+    hr {
+      border: 1px solid #800000;
+    }
+    .footer {
+      text-align: center;
+      padding: 10px 0;
+      background-color: #f8f9fa;
+      margin-top: 20px;
+    }
+  </style>
+</head>
 
 
-  <head>
-    <title>Rails Template</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<body>
+  <!-- Header with Logo -->
+  <header>
+    <%= image_tag "https://chen.uchicago.edu/files/2019/07/UChicago-logo-1024x1024.jpg", alt: "University of Chicago", class: "uchicago-logo" %>
+  </header>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="<%= root_path %>">Home</a>
+    <a href="<%= alumni_directory_path %>">Alumni Directory</a>
+    <a href="<%= job_postings_path %>">Job Postings</a>
+    <a href="<%= job_applications_path %>">Job Applications</a>
+    <a href="<%= posts_path %>">Posts</a>
+    <a href="<%= edit_user_registration_path %>">Edit Profile</a>
+    <a href="<%= follow_requests_path %>">Follow Requests</a>
+  </nav>
 
- <body>
-    <!-- Navigation Bar -->
-    <nav>
-      <ul style="list-style-type: none; padding: 0; display: flex; gap: 15px;">
-        <li><%= link_to "Home", root_path, class: "btn btn-primary" %></li>
-        <li><%= link_to "Alumni Directory", alumni_directory_path, class: "btn btn-secondary" %></li>
-        <li><%= link_to "Job Postings", job_postings_path, class: "btn btn-info" %></li>
-        <li><%= link_to "Job applications", job_applications_path, class: "btn btn-tough" %></li>
-        <li><%= link_to "Posts", posts_path, class: "btn btn-success" %></li>
-        <li><%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-warning" %></li>
-        <li><%= link_to "Follow requests", follow_requests_path, class: "btn btn-warning" %></li>
+  <hr>
 
-      </ul>
-    </nav>
+  <!-- Main Content -->
+  <div class="container mt-4">
+    <%= yield %>
+  </div>
 
-    <hr>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; <%= Time.current.year %> University of Chicago Alumni Platform. All rights reserved.</p>
+  </footer>
 
-    <!-- Main Content -->
-    <div>
-      <%= yield %>
-    </div>
-  </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>

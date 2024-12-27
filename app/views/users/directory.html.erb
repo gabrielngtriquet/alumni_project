@@ -1,67 +1,68 @@
-<div>
-  <h1>Alumni Directory</h1>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Alumni Directory</h1>
 
   <!-- Filter Form -->
-  <%= form_with(url: alumni_directory_path, method: :get, local: true) do %>
-    <fieldset>
-      <legend>Filter Users</legend>
+  <%= form_with(url: alumni_directory_path, method: :get, local: true, class: "mb-4") do %>
+    <fieldset class="border p-4 rounded shadow-sm">
+      <legend class="w-auto px-2 text-primary">Filter Users</legend>
       
-      <div>
-        <label for="admin">Admin:</label>
-        <input type="checkbox" name="admin" id="admin" value="1" <%= "checked" if params[:admin] == "1" %>>
+      <div class="row mb-3">
+        <div class="col-md-3">
+          <label for="admin">Admin:</label>
+          <input type="checkbox" name="admin" id="admin" value="1" <%= "checked" if params[:admin] == "1" %>>
+        </div>
+        <div class="col-md-3">
+          <label for="alumn">Alumn:</label>
+          <input type="checkbox" name="alumn" id="alumn" value="1" <%= "checked" if params[:alumn] == "1" %>>
+        </div>
+        <div class="col-md-3">
+          <label for="student">Student:</label>
+          <input type="checkbox" name="student" id="student" value="1" <%= "checked" if params[:student] == "1" %>>
+        </div>
+        <div class="col-md-3">
+          <label for="professor">Professor:</label>
+          <input type="checkbox" name="professor" id="professor" value="1" <%= "checked" if params[:professor] == "1" %>>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="country_of_residence">Country of Residence:</label>
+          <select name="country_of_residence" id="country_of_residence" class="form-control">
+            <option value="">All Countries</option>
+            <% User.distinct.pluck(:country_of_residence).compact.each do |country| %>
+              <option value="<%= country %>" <%= "selected" if params[:country_of_residence] == country %>>
+                <%= country %>
+              </option>
+            <% end %>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="company">Company:</label>
+          <input type="text" name="company" id="company" class="form-control" value="<%= params[:company] %>">
+        </div>
+        <div class="col-md-4">
+          <label for="industry_of_occupation">Industry of Occupation:</label>
+          <select name="industry_of_occupation" id="industry_of_occupation" class="form-control">
+            <option value="">All Industries</option>
+            <% User.distinct.pluck(:industry_of_occupation).compact.each do |industry| %>
+              <option value="<%= industry %>" <%= "selected" if params[:industry_of_occupation] == industry %>>
+                <%= industry %>
+              </option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="dob">Date of Birth:</label>
+          <input type="date" name="dob" id="dob" class="form-control" value="<%= params[:dob] %>">
+        </div>
       </div>
 
       <div>
-        <label for="alumn">Alumn:</label>
-        <input type="checkbox" name="alumn" id="alumn" value="1" <%= "checked" if params[:alumn] == "1" %>>
-      </div>
-
-      <div>
-        <label for="student">Student:</label>
-        <input type="checkbox" name="student" id="student" value="1" <%= "checked" if params[:student] == "1" %>>
-      </div>
-
-      <div>
-        <label for="professor">Professor:</label>
-        <input type="checkbox" name="professor" id="professor" value="1" <%= "checked" if params[:professor] == "1" %>>
-      </div>
-
-      <div>
-        <label for="country_of_residence">Country of Residence:</label>
-        <select name="country_of_residence" id="country_of_residence">
-          <option value="">All Countries</option>
-          <% User.distinct.pluck(:country_of_residence).compact.each do |country| %>
-            <option value="<%= country %>" <%= "selected" if params[:country_of_residence] == country %>>
-              <%= country %>
-            </option>
-          <% end %>
-        </select>
-      </div>
-
-      <div>
-        <label for="company">Company:</label>
-        <input type="text" name="company" id="company" value="<%= params[:company] %>">
-      </div>
-
-      <div>
-        <label for="industry_of_occupation">Industry of Occupation:</label>
-        <select name="industry_of_occupation" id="industry_of_occupation">
-          <option value="">All Industries</option>
-          <% User.distinct.pluck(:industry_of_occupation).compact.each do |industry| %>
-            <option value="<%= industry %>" <%= "selected" if params[:industry_of_occupation] == industry %>>
-              <%= industry %>
-            </option>
-          <% end %>
-        </select>
-      </div>
-
-      <div>
-        <label for="dob">Date of Birth:</label>
-        <input type="date" name="dob" id="dob" value="<%= params[:dob] %>">
-      </div>
-
-      <div>
-        <button type="submit">Search</button>
+        <button type="submit" class="btn btn-primary">Search</button>
       </div>
     </fieldset>
   <% end %>
@@ -70,10 +71,11 @@
 
   <!-- Results Table -->
   <div>
-    <table border="1">
-      <thead>
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="thead-dark">
         <tr>
           <th>Name</th>
+          <th>Profile Picture</th>
           <th>Role</th>
           <th>Country</th>
           <th>City</th>
@@ -83,12 +85,17 @@
         </tr>
       </thead>
       <tbody>
-
-      <%= debug @users %>
         <% if @users.present? %>
           <% @users.each do |user| %>
             <tr>
               <td><%= user.name || "N/A" %></td>
+              <td>
+                <% if user.profile_picture.present? %>
+                  <%= image_tag user.profile_picture, alt: "Profile Picture", class: "img-thumbnail", width: 50, height: 50 %>
+                <% else %>
+                  N/A
+                <% end %>
+              </td>
               <td>
                 <% if user.admin %>
                   Admin
@@ -111,7 +118,7 @@
           <% end %>
         <% else %>
           <tr>
-            <td colspan="7">No users found.</td>
+            <td colspan="8" class="text-center">No users found.</td>
           </tr>
         <% end %>
       </tbody>

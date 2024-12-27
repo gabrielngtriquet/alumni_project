@@ -19,3 +19,55 @@
   display: block;  /* Ensures it behaves like a block element */
   margin: 0 auto;  /* Centers the image horizontally */
 }
+
+.btn {
+  color: white !important; /* White text for readability */
+  border: none;
+  font-weight: bold;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase; /* Optional: For a professional look */
+}
+
+.btn-primary {
+  background-color: #800000; /* UChicago maroon */
+}
+
+.btn-primary:hover {
+  background-color: #990000; /* Slightly darker maroon on hover */
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Neutral gray */
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Slightly darker gray on hover */
+}
+
+.btn-info {
+  background-color: #0056b3; /* UChicago blue accent */
+}
+
+.btn-info:hover {
+  background-color: #00408a; /* Darker blue on hover */
+}
+
+.btn-success {
+  background-color: #198754; /* Green for success */
+}
+
+.btn-success:hover {
+  background-color: #146c43; /* Darker green on hover */
+}
+
+.btn-warning {
+  background-color: #ffc107; /* Yellow for warnings or notifications */
+}
+
+.btn-warning:hover {
+  background-color: #e0a800; /* Darker yellow on hover */
+}
+
